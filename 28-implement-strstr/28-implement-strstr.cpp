@@ -15,7 +15,7 @@ public:
         {
             if(haystack[i] == needle[0] )
             {
-                if(haystack.compare(i,needle.size(),needle)==0) 
+                if(haystack.compare(i,x,needle)==0) 
                     return i;
             }   
         } 
