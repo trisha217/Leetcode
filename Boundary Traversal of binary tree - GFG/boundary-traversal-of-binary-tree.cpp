@@ -121,37 +121,37 @@ public:
         }
     }
     
-    // void addRight(Node *root, vector<int> &res){
-    //     vector<int> temp;
-    //     Node* cur = root->right;
-    //     while(cur){
-    //         if(!isLeaf(cur)){
-    //             temp.push_back(cur->data);
-    //         }
-    //         if(cur->right){
-    //             cur = cur->right;
-    //         }
-    //         else{
-    //             cur = cur->left;
-    //         }
-    //         for(int i=temp.size()-1;i>=0;--i){
-    //             res.push_back(temp[i]);
-    //         }
-    //     }
-    // }
+    void addRight(Node *root, vector<int> &res){
+        Node* cur = root->right;
+        vector<int> temp;
+        while(cur){
+            if(!isLeaf(cur)){
+                temp.push_back(cur->data);
+            }
+            if(cur->right){
+                cur = cur->right;
+            }
+            else{
+                cur = cur->left;
+            }
+        }
+            for(int i=temp.size()-1;i>=0;--i){
+                res.push_back(temp[i]);
+            }
+    }
     
-    void addRight(Node * root, vector < int > & res) {
-  Node * cur = root -> right;
-  vector < int > tmp;
-  while (cur) {
-    if (!isLeaf(cur)) tmp.push_back(cur -> data);
-    if (cur -> right) cur = cur -> right;
-    else cur = cur -> left;
-  }
-  for (int i = tmp.size() - 1; i >= 0; --i) {
-    res.push_back(tmp[i]);
-  }
-}
+//     void addRight(Node * root, vector < int > & res) {
+//   Node * cur = root -> right;
+//   vector < int > tmp;
+//   while (cur) {
+//     if (!isLeaf(cur)) tmp.push_back(cur -> data);
+//     if (cur -> right) cur = cur -> right;
+//     else cur = cur -> left;
+//   }
+//   for (int i = tmp.size() - 1; i >= 0; --i) {
+//     res.push_back(tmp[i]);
+//   }
+// }
     
     void addLeaves(Node *root, vector<int> &res){
         if(isLeaf(root)){
