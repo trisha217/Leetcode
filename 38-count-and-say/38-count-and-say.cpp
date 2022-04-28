@@ -9,10 +9,10 @@ public:
         }
         string s = "11";
         for(int i=3;i<=n;i++){
-            //s=s+"#";
+            s=s+"#";
             string temp="";
             int count=1;
-            for(int j=0;j<s.size();j++){
+            for(int j=0;j<s.size()-1;j++){
                 if(s[j]!=s[j+1])
                 {
                     temp+=to_string(count);
