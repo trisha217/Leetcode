@@ -1,5 +1,8 @@
 class Solution {
 public:
+    // Greedy rule:
+        // 1. Append the 'a' or 'b' based on which value a and b is greater.
+        // 2. Make sure there is not substring 'aaa' or 'bbb' exists. 
     string strWithout3a3b(int a, int b) {
         string res="";
         while(a||b){
