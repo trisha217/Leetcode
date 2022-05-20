@@ -5,7 +5,8 @@ public:
         int n = obstacleGrid[0].size();
         if(obstacleGrid[0][0]==1 || obstacleGrid[m-1][n-1]==1)
             return 0;
-        vector<vector<int>>dp(m,vector<int>(n));
+        int dp[m][n];
+        memset(dp,0,sizeof(dp));
         for(int i=0;i<n;i++){
             if(obstacleGrid[0][i]==0)
                 dp[0][i]=1;
