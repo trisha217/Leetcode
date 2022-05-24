@@ -1,12 +1,18 @@
 class Solution {
 public:
     int titleToNumber(string columnTitle) {
-        int result = 0;
-        for(char c : columnTitle)
-        {
-            int d = c - 'A' + 1;
-            result = result * 26 + d;
+        int ans;
+        
+        for(int i=0;i<columnTitle.size();i++){
+            char c= columnTitle[i];
+            int ascii = c;
+            ascii = ascii-64;
+            if(i==0){
+                ans = ascii;
+            } else {
+                ans = (ans*26)+ascii;
+            }   
         }
-        return result;
+        return ans ;
     }
 };
