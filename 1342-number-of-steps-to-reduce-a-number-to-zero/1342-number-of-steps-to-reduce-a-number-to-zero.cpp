@@ -1,17 +1,17 @@
-class Solution {
+class Solution 
+{
 public:
-    int numberOfSteps(int n) {
-        long int c =0;
-        while(n!=0){
-            if(n%2==0){
-                n = n/2;
-                c++;
-            }
-            else{
-                n = n-1;
-                c++;
-            }
+    int numberOfSteps(int num) 
+    {
+        int count=0;
+        while(num)
+        {
+            if(num%2) num -= 1; //when num is odd, substract 1
+               
+            else num /= 2; //when num is even, divde by 2
+                    
+            count++;
         }
-        return c;
+        return count;
     }
 };
