@@ -1,17 +1,17 @@
+//just increment the count when you encounter ( and decrement the count when you encounter ) symbol and return the count
+
 class Solution {
 public:
     int maxDepth(string s) {
-        stack<char> st;
-        int maxi=0;
-        for(int i=0;i<s.size();i++){
-            if(s[i]=='('){
-                st.push('(');
-            }else if(s[i]==')'){
-                int x=st.size();
-                maxi=max(maxi,x);
-                st.pop();
+        //increase the count at insertion and decrease at deletion 
+        int count=0,mx_count=0;
+        for(auto x:s){
+            if(x=='(')count++;
+            else if(x==')'){
+                mx_count=max(mx_count,count);
+                count--;
             }
         }
-        return maxi;
+        return mx_count;
     }
 };
