@@ -15,9 +15,11 @@ public:
         if(!root){
             return 0;
         }
-        int left = solve(root->left);
-        int right = solve(root->right);
-        return (left==0 || right==0) ? left + right + 1 : min(left,right) + 1;
+        else{
+            int l = solve(root->left);
+            int r = solve(root->right);
+            return (l==0 || r==0) ? l + r + 1 : min(l,r)+1;
+        }
     }
     int minDepth(TreeNode* root) {
         int ans = solve(root);
