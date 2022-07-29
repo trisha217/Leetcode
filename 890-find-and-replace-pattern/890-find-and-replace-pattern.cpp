@@ -1,6 +1,6 @@
 class Solution {
 public:
-    vector<string> findAndReplacePattern(vector<string>& words, string p) {        
+vector<string> findAndReplacePattern(vector<string>& words, string p) {        
 	vector<string> ans;
 	for(auto& w : words) 
 		if(match(w, p)) ans.push_back(w);
