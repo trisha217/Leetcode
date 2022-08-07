@@ -1,13 +1,17 @@
+//Solution 02:
 class Solution {
 public:
     vector<int> runningSum(vector<int>& nums) {
-        int sum = nums[0];
         vector<int> ans;
-        ans.push_back(nums[0]);
-        for(int i=1;i<nums.size();i++){
-            sum = sum + nums[i];
-            ans.push_back(sum);
-        }
+        
+        for(int i=1; i<=nums.size(); i++)
+            ans.push_back(accumulate(nums.begin(), (nums.begin()+i), 0));
+        
         return ans;
     }
 };
+
+/*Using STL function
+It takes 3 parameters: first, last &sum.
+Time complexity: O(n×k), where n is the distance from first to last, O(k) is the complexity of the function.
+*/
