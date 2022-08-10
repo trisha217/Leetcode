@@ -11,7 +11,7 @@
  */
 class Solution {
 public:
-    TreeNode* convertBST(int left,int right,vector<int>&arr){
+     TreeNode* convertBST(int left,int right,vector<int>&arr){
         if(left>right) return nullptr;
         //int mid = left+((right-left)/2);
         int mid = (left+right)/2;
@@ -24,5 +24,3 @@ public:
         return convertBST(0,nums.size()-1,nums);
     }
 };
-//TC : O(N)
-//SC : O(1)
