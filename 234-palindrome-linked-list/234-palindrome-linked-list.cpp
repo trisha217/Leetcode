@@ -8,6 +8,10 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+//keep two pointers slow and fast
+//when the fast pointer reaches the end of the ll, then make the slow's next pointer point to the reverse of the linked list.
+//start traversing the ll again using head of the ll and simultaneously traverse the slow pointer as well
+//if at any point of time, head's val is not equal to the slow's value then return false otherwise return true after traversing the complete ll
 class Solution {
 public:
     bool isPalindrome(ListNode* head) {
