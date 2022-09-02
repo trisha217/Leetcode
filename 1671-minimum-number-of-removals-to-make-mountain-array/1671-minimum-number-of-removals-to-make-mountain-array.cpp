@@ -29,12 +29,22 @@ public:
         //     cout<<dp2[i]; 
         // }
         // cout<<endl;
-        int maxi=INT_MIN;
-	    for(int i=0;i<n;i++){
-            if(dp1[i]==1 or dp2[i]==1)
+        int ans =1;
+        for(int i=0;i<n;i++){
+            if(dp1[i]==1 || dp2[i]==1){
                 continue;
-	        maxi=max(maxi,dp1[i]+dp2[i]-1);
-	    }
-        return nums.size()-maxi;
+            }
+            bitonic[i] = dp1[i] + dp2[i] -1;
+            ans = max(ans,bitonic[i]);  
+        }
+        //cout<<ans<<endl;
+        return nums.size()-ans;
+	    // int maxi=INT_MIN;
+	    // for(int i=0;i<n;i++){
+	    // if(dp1[i]==1 or dp2[i]==1)
+	    // continue;
+	    //     maxi=max(maxi,dp1[i]+dp2[i]-1);
+	    // }
+	    // return nums.size()-maxi;
     }
 };
