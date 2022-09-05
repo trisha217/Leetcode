@@ -18,29 +18,23 @@ public:
 };
 */
 
-class Solution {
+class Solution { // 20 ms, faster than 86.78%
 public:
     vector<vector<int>> levelOrder(Node* root) {
-        if (root == NULL) 
-			return {};
-        vector<vector<int>> res;
+        if (root == nullptr) return {};
         queue<Node*> q;
-        q.push(root); 
-        while (!q.empty())
-        {
-            int size = q.size(); 
-            vector<int> currlevel;
-            for(int i=0;i<size;i++){
-                Node* tmp=q.front();
-                q.pop();
-                currlevel.push_back(tmp->val);
-                for (auto n : tmp -> children)
-                     q.push(n); 
+        q.push(root);
+        vector<vector<int>> ans;
+        while (!q.empty()) {
+            ans.emplace_back();
+            for (int i = q.size(); i >= 1; i--) {
+                Node* curr = q.front(); q.pop();
+                ans.back().push_back(curr->val);
+                for (Node* child : curr->children) {
+                    q.push(child);
+                }
             }
-            res.push_back(currlevel);
         }
-        return res;
-
-        
+        return ans;
     }
 };
