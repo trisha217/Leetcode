@@ -10,10 +10,16 @@ class Solution {
             if(oneD>=1){
                 dp[i] = dp[i] + dp[i-1];
             }
+            System.out.println("value of dp[i] at i " + i + " " + dp[i]);
             if(twoD>=10 && twoD<=26){
                 dp[i] = dp[i] + dp[i-2];
             } 
+            System.out.println("value of dp[i] at i " + i + " " + dp[i]);
         }
+        for(int i=0;i<=n;i++){
+            System.out.print(dp[i]);
+        }
+        System.out.println();
         return dp[n];
     }
 }
