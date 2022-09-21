@@ -19,7 +19,8 @@ class Solution {
             first.next = second.next;
             second.next = curr.next;
             curr.next = second;
-            curr.next.next = first;
+            //couldnt get
+            //curr.next.next = first;
             curr = curr.next.next;
         }
         return temp.next;
