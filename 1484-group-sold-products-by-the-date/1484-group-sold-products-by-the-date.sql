@@ -1,4 +1,5 @@
 # Write your MySQL query statement below
+# Write your MySQL query statement below
 SELECT
     sell_date,
     COUNT(DISTINCT product) num_sold,
