@@ -1,38 +1,25 @@
 class Solution {
     public int numDecodings(String s) {
-        int[] dp = new int[s.length()];
-        if(s.charAt(0)=='0'){
-            return 0;
-        }
+        int n= s.length();
+        int[] dp = new int[n+1];
         dp[0] = 1;
-        for(int i=1;i<dp.length;i++){
-            if(s.charAt(i-1) == '0' && s.charAt(i) == '0'){
-                dp[i] = 0;
+        dp[1] = s.charAt(0) == '0' ? 0 : 1;
+        for(int i = 2;i<=n;i++){
+            int oneD = Integer.valueOf(s.substring(i-1,i));
+            int twoD = Integer.valueOf(s.substring(i-2,i));
+            if(oneD>=1){
+                dp[i] = dp[i] + dp[i-1];
             }
-            else if(s.charAt(i-1) == '0' && s.charAt(i) != '0'){
-                dp[i] = dp[i-1];
-            }
-            else if(s.charAt(i-1) != '0' && s.charAt(i) == '0')
-            {
-                //if(Integer.parseInt(s.substring(i-1,i+1))<=26)
-                if(s.charAt(i-1)=='1' || s.charAt(i-1)=='2'){
-                    dp[i] = i >= 2 ? dp[i-2] : 1;
-                }
-                else{
-                    dp[i] = 0;
-                }
-                
-            }
-            else{
-                dp[i] = dp[i-1];
-                if(Integer.parseInt(s.substring(i-1,i+1))<=26){
-                    dp[i]= dp[i] + (i >= 2 ? dp[i-2] : 1);
-                }
-                else{
-                    dp[i] = dp[i-1];
-                }
-            }
+            //System.out.println("value of dp[i] at i " + i + " " + dp[i]);
+            if(twoD>=10 && twoD<=26){
+                dp[i] = dp[i] + dp[i-2];
+            } 
+            //System.out.println("value of dp[i] at i " + i + " " + dp[i]);
         }
-        return dp[s.length()-1];
+        // for(int i=0;i<=n;i++){
+        //     System.out.print(dp[i]);
+        // }
+        // System.out.println();
+        return dp[n];
     }
 }
