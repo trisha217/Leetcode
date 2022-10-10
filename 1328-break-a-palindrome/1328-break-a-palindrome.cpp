@@ -12,6 +12,7 @@ public:
                 return palindrome;
             }
         }
+        //if string has only 'a's
         palindrome[n-1]='b';
         return palindrome;
     }
