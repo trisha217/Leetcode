@@ -1,4 +1,4 @@
- class Solution {
+class Solution {
 public:
     int ans = INT_MAX ;
     void fun(vector<int>&v , int in , vector<int>&c){
