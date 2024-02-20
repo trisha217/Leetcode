@@ -1,16 +1,33 @@
 class Solution {
 public:
     int missingNumber(vector<int>& nums) {
-        // sort(nums.begin(),nums.end());
-        // int n= nums.size();
-        // for(int i=0;i<n;i++){
-        //     if(i!=nums[i]){
-        //         return i;
-        //     }
-        // }
-        // return n;
-        ios_base::sync_with_stdio(false);cin.tie(0);cout.tie(0);
-        int n= nums.size();
-        return (n*(n+1))/2 - accumulate(nums.begin(),nums.end(),0);
+        int n = nums.size();
+        if(n==1){
+            if(nums[0]==1){
+                return 0;
+            }
+            else{
+                return 1;
+            }
+        }
+        int flag =0;
+        int ans;
+        sort(nums.begin(),nums.end());
+        if(nums[0]!=0){
+            return 0;
+        }
+        for(int i=0;i<n-1;i++){
+            if(nums[i]+1 == nums[i+1]){
+                
+            }
+            else{
+                flag =1;
+                ans = nums[i]+1;
+            }
+        }
+        if(flag ==1)
+            return ans;
+        else 
+            return n;
     }
 };
