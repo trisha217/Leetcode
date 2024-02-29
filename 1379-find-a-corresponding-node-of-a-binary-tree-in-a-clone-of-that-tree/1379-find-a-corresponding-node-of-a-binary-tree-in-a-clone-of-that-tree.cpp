@@ -7,22 +7,32 @@
  *     TreeNode(int x) : val(x), left(NULL), right(NULL) {}
  * };
  */
+
 class Solution {
 public:
-    TreeNode* getTargetCopy(TreeNode* original, TreeNode* cloned, TreeNode* target) {
-        queue<TreeNode*>q;
-        q.push(cloned);
-        while(!q.empty())
+    TreeNode* getTargetCopy(TreeNode* original, TreeNode* clone, TreeNode* target) {
+        int value = target->val;
+        // Base Case
+        if (clone->val == value)
+            return clone;
+        //level order traversal
+        queue<TreeNode*> q;
+        q.push(clone);
+        while (!q.empty()) 
         {
-            auto temp = q.front();
+            TreeNode* node = q.front();
             q.pop();
-            if(temp->left!=NULL)
-                q.push(temp->left);
-            if(temp->right!=NULL)
-                q.push(temp->right);
-            if(temp->val==target->val)
-                return temp;
+            if(node->val == value){
+                return node;
+            }
+            else{
+                if (node->left != NULL)
+                    q.push(node->left);
+
+                if (node->right != NULL)
+                    q.push(node->right);  
+            }
         }
-    return NULL;
+        return clone;
     }
 };
