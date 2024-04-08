@@ -1,21 +1,28 @@
 class Solution {
 public:
     int countStudents(vector<int>& students, vector<int>& sandwiches) {
-     int circular = 0 , square = 0;
-     for( auto it : students){
-        if(it) square++;
-        else circular++;
-     }   
-     for(auto it : sandwiches){
-        if(it){
-            square--;
-            if(square<0) return circular;
+        int square =0;
+        int circle = 0;
+        for(auto it: students){
+            if(it ==1){
+                square++;
+            }
+            else{
+                circle++;
+            }
         }
-        else{
-            circular--;
-            if(circular < 0) return square;
+        for(auto it: sandwiches){
+            if(it==1){
+                square--;
+                if(square<0)
+                    return circle;
+            }
+            else{
+                circle--;
+                if(circle<0)
+                    return square;
+            }     
         }
-     }
-     return circular + square;
+        return square+circle;
     }
 };
