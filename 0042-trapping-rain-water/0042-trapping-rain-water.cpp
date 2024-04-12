@@ -8,7 +8,7 @@ public:
         int rightmax = 0;
         int ans = 0;
         while(l<=r){
-            if(height[l]<height[r]){
+            if(height[l]<=height[r]){
                 if(height[l]>leftmax){
                     leftmax = height[l];
                 }
