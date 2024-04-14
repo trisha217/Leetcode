@@ -3,10 +3,10 @@ public:
     int maxProfit(vector<int>& Arr) {
         int n = Arr.size();
         // Create a DP table to memoize results
-        vector<vector<int>> dp(n + 1, vector<int>(2, -1));
+        vector<int> ahead(2,0),cur(2,0);
 
         // Base condition: When we have no stocks left, the profit is 0.
-        dp[n][0] = dp[n][1] = 0;
+        ahead[0] = ahead[1] = 0;
 
         int profit;
 
@@ -14,18 +14,19 @@ public:
         for (int ind = n - 1; ind >= 0; ind--) {
             for (int buy = 0; buy <= 1; buy++) {
                 if (buy == 0) { // We can buy the stock
-                    profit = max(0 + dp[ind + 1][0], -Arr[ind] + dp[ind + 1][1]);
+                    profit = max(0 + ahead[0], -Arr[ind] + ahead[1]);
                 }
 
                 if (buy == 1) { // We can sell the stock
-                    profit = max(0 + dp[ind + 1][1], Arr[ind] + dp[ind + 1][0]);
+                    profit = max(0 + ahead[1], Arr[ind] + ahead[0]);
                 }
 
-                dp[ind][buy] = profit;
+                cur[buy] = profit;
             }
+            ahead = cur;
         }
 
         // The maximum profit is stored in dp[0][0] after all calculations
-        return dp[0][0];
+        return ahead[0];
     }
 };
