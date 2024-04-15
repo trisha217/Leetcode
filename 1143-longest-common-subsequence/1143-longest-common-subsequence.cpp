@@ -3,17 +3,18 @@ public:
     int longestCommonSubsequence(string x, string y) {
         int n=x.size(),m=y.size();
         string s;
-        vector<vector<int>> dp(n+1,vector<int> (m+1,0));
-        
+        vector<int> cur(m+1,0);
+        vector<int> prev(m+1,0);
         
         for(int i=1;i<=n;i++){
             for(int j=1;j<=m;j++){
                 if(x[i-1]==y[j-1])
-                    dp[i][j]=1+dp[i-1][j-1];
+                    cur[j]=1 + prev[j-1];
                 else {
-                    dp[i][j]=max(dp[i][j-1],dp[i-1][j]);
+                    cur[j]=max(cur[j-1],prev[j]);
                 }
             }
+            prev = cur;
         }
         // // for printing longest common subsequence
         // int i=n,j=m;
@@ -29,6 +30,6 @@ public:
         // }
         // reverse (s.begin(),s.end());    // reverse the string as we started from last
         // cout<<s;
-        return dp[n][m];
+        return prev[m];
     }
 };
