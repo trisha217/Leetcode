@@ -4,7 +4,7 @@ public:
         int n = s.size();
         int m = t.size();
         int MOD = 1e9 + 7; // Define a modulo value
-        vector<vector<long long>> dp(n + 1, vector<long long>(m + 1, 0)); // Changed int to long long
+        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0)); // Changed int to long long
         for (int ind1 = 0; ind1 <= n; ind1++) {
             dp[ind1][0] = 1;
         }
