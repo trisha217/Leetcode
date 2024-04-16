@@ -4,22 +4,19 @@ public:
         int n = s.size();
         int m = t.size();
         int MOD = 1e9 + 7; // Define a modulo value
-        vector<vector<int>> dp(n + 1, vector<int>(m + 1, 0)); // Changed int to long long
-        for (int ind1 = 0; ind1 <= n; ind1++) {
-            dp[ind1][0] = 1;
-        }
-        for (int ind2 = 1; ind2 <= m; ind2++) {
-            dp[0][ind2] = 0;
-        }
+        vector<int> prev(m + 1, 0); 
+        vector<int> cur(m + 1, 0); 
+        prev[0]=cur[0]=1;
         for (int ind1 = 1; ind1 <= n; ind1++) {
             for (int ind2 = 1; ind2 <= m; ind2++) {
                 if (s[ind1 - 1] == t[ind2 - 1]) {
-                    dp[ind1][ind2] = (dp[ind1 - 1][ind2 - 1] + dp[ind1 - 1][ind2])% MOD;
+                    cur[ind2] = (prev[ind2 - 1] + prev[ind2])% MOD;
                 } else {
-                    dp[ind1][ind2] = dp[ind1 - 1][ind2];
+                    cur[ind2] = prev[ind2];
                 }
             }
+            prev = cur;
         }
-        return dp[n][m];
+        return prev[m];
     }
 };
