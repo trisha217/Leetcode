@@ -24,4 +24,5 @@ public:
     }
 };
 
-// tc - exponential
+// tc - O(c^3)
+// sc - O(c^2) + stack space
