@@ -1,46 +1,26 @@
 class Solution {
 public:
-     void bfs(int row, int col, vector<vector<int>> &vis, vector<vector<char>>&grid) {
-      // mark it visited
-      vis[row][col] = 1; 
-      queue<pair<int,int>> q;
-      // push the node in queue
-      q.push({row, col}); 
-      int n = grid.size(); 
-      int m = grid[0].size(); 
-      int delrow[] = {-1,0,+1,0};
-      int delcol[] = {0,-1,0,+1};
-      // until the queue becomes empty
-      while(!q.empty()) {
-          int row = q.front().first; 
-          int col = q.front().second; 
-          q.pop(); 
-          // traverse in the neighbours and mark them if its a land 
-          for(int i= 0; i<4;i++) {
-                  int nrow = row + delrow[i]; 
-                  int ncol = col + delcol[i]; 
-                  // neighbour row and column is valid, and is an unvisited land
-                  if(nrow >= 0 && nrow < n && ncol >= 0 && ncol < m 
-                  && grid[nrow][ncol] == '1' && !vis[nrow][ncol]) {
-                      vis[nrow][ncol] = 1; 
-                      q.push({nrow, ncol}); 
-                  }
-          }
-      }
-    }
     int numIslands(vector<vector<char>>& grid) {
-        int n = grid.size(); 
-        int m = grid[0].size(); 
-        vector<vector<int>> vis(n, vector<int>(m, 0)); 
-        int cnt = 0; 
-        for(int row = 0; row < n ; row++) {
-            for(int col = 0; col < m ;col++) {
-                if(!vis[row][col] && grid[row][col] == '1') {
-                    cnt++; 
-                    bfs(row, col, vis, grid); 
+        int ans = 0;
+        for(int i=0;i<grid.size();i++){
+            for(int j=0;j<grid[0].size();j++){
+                if(grid[i][j]=='1'){
+                    ans++;
+                    dfs(grid,i,j);
                 }
             }
         }
-        return cnt; 
+        return ans;
+    }
+    void dfs(vector<vector<char>>& grid,int y, int x){
+        if(x<0 || x>=grid[0].size() || y<0 || y>=grid.size() || grid[y][x]!='1'){
+            return;
+        }
+        grid[y][x] = '*'; // destroying visited cells so they are not re-visited
+        // recursive dfs on all neighbours
+        dfs(grid, y + 1, x);
+        dfs(grid, y - 1, x);            
+        dfs(grid, y, x + 1);
+        dfs(grid, y, x - 1);
     }
 };
