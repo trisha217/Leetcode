@@ -9,7 +9,6 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
 // minus denotes that coins are needed by that node
 // positive denotes extra coins on a particular node
 class Solution {
