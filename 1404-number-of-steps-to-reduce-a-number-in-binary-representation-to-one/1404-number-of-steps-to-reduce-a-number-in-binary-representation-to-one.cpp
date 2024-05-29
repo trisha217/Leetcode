@@ -1,4 +1,4 @@
- class Solution {
+class Solution {
 public:
     int numSteps(string s) {
         int ans=0;
