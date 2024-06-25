@@ -11,19 +11,17 @@
  */
 class Solution {
 public:
-    int sum = 0;
-    void dfs(TreeNode* root){
-        if(!root){
-            return;
-        }
-        dfs(root->right);
-        root->val+=sum;
-        sum = root->val;
-        dfs(root->left);
-        return;
+    void f(TreeNode* root, int &val) {
+        if (!root) return;  // Base case: if the node is null, do nothing
+        if (root->right) f(root->right, val);  // Traverse the right subtree
+        root->val += val;  // Update the current node's value
+        val = root->val;  // Update the accumulated sum
+        if (root->left) f(root->left, val);  // Traverse the left subtree
     }
+
     TreeNode* bstToGst(TreeNode* root) {
-        dfs(root);
-        return root;
+        int val = 0;  // Initialize the accumulated sum to 0
+        f(root, val);  // Call the helper function with the root and initial sum
+        return root;  // Return the modified tree
     }
 };
