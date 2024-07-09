@@ -2,18 +2,21 @@ class Solution {
 public:
     double averageWaitingTime(vector<vector<int>>& customers) {
         int n = customers.size();
-        double time = customers[0][1];
-        double start = customers[0][0];
-        for(int i=0;i<n-1;i++){
-            start = start + customers[i][1];
-            if(start > customers[i+1][0]){
-                time = time + start + (customers[i+1][1]-customers[i+1][0]);
+        double ans = 0;
+        int kab_aya = 0;
+        int kab_gaya = 0;
+        int start_time = 0;
+        for(int i=0;i<n;i++){
+            kab_aya = customers[i][0];
+            if(kab_gaya>kab_aya){
+                start_time = kab_gaya;
             }
             else{
-                time = time + customers[i+1][1];
-                start = customers[i+1][0];
+                start_time = kab_aya;
             }
+            kab_gaya = start_time + customers[i][1];
+            ans = ans + (kab_gaya - kab_aya);
         }
-        return time/n;
+        return ans/n;
     }
 };
