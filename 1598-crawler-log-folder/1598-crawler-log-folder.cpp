@@ -6,7 +6,6 @@ public:
         for(int i=0;i<n;i++){
             if(logs[i][0] != '.'){
                 st.push(logs[i]);
-                continue;
             }
             if(!st.empty() && (logs[i] == "../")){
                 st.pop();
