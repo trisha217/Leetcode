@@ -30,8 +30,3 @@ public:
             myStack.push(c);
     }
 };
-
-
-//(u(love)i)
-//(uevoli)
-//iloveu
