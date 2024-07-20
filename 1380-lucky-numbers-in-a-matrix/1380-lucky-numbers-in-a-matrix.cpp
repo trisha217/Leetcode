@@ -1,38 +1,31 @@
 class Solution {
 public:
     vector<int> luckyNumbers (vector<vector<int>>& matrix) {
-        vector<int> ans;
+        vector<int>ans;
+        bool a = false, b = false;
         int n = matrix.size();
         int m = matrix[0].size();
-        
-        for (int i = 0; i < n; ++i) {
-            for (int j = 0; j < m; ++j) {
-                int check = matrix[i][j];
-                bool flag = true;
-                
-                // Check in row
-                for (int k = 0; k < m; ++k) {
-                    if (check > matrix[i][k]) {
-                        flag = false;
-                        break;
-                    }
+
+        for(int i =-0;i<n;i++){
+            for(int j=0;j<m;j++){
+
+                int min_ele_row = *min_element(matrix[i].begin(),matrix[i].end());
+                if(matrix[i][j] == min_ele_row) a = true;
+
+                int max_ele_col = INT_MIN;
+                for(int k=0;k<n;k++){
+                    if(matrix[k][j] > max_ele_col) max_ele_col = matrix[k][j];
                 }
-                
-                // Check in column if it's the minimum in the row
-                if (flag) {
-                    for (int k = 0; k < n; ++k) {
-                        if (check < matrix[k][j]) {
-                            flag = false;
-                            break;
-                        }
-                    }
-                }
-                
-                if (flag) {
-                    ans.push_back(check);
-                }
+
+                if(max_ele_col == matrix[i][j]) b = true;
+
+                if(a && b) ans.push_back(matrix[i][j]);
+
+                a = false, b= false;
             }
+            
         }
         return ans;
+        
     }
 };
