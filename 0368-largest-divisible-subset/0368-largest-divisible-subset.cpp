@@ -1,34 +1,32 @@
 class Solution {
 public:
-    vector<int> largestDivisibleSubset(vector<int>& arr) {
-        int n = arr.size();
-        sort(arr.begin(), arr.end());
-        vector<int> dp(n,1);
-        vector<int> hash(n,1);
-        for(int ind=0; ind<=n-1; ind++){
-            hash[ind] = ind; 
-            for(int prev_index = 0; prev_index <=ind-1; prev_index ++){
-                if(arr[ind]%arr[prev_index] == 0 && 1 + dp[prev_index] > dp[ind]){
-                    dp[ind] = 1 + dp[prev_index];
-                    hash[ind] = prev_index;
+    vector<int> largestDivisibleSubset(vector<int>& nums) {
+        int n = nums.size();
+        sort(nums.begin(),nums.end());
+        vector<int> dp(n,1),hash(n);
+        int maxi=1,last_index=0;
+        for(int i = 0;i<n;i++){
+            hash[i]=i;
+            for(int j = 0;j<i;j++){
+                if(nums[i]%nums[j]==0 && 1+dp[j]>dp[i]){
+                    dp[i] = 1 + dp[j];
+                    hash[i] = j;
                 }
             }
-        }
-        int ans = -1;
-        int lastIndex =-1; 
-        for(int i=0; i<=n-1; i++){
-            if(dp[i]> ans){
-                ans = dp[i];
-                lastIndex = i;
+            if(maxi<dp[i]){
+                maxi = dp[i];
+                last_index = i;
             }
         }
-        vector<int> temp;
-        temp.push_back(arr[lastIndex]);
-        while(hash[lastIndex] != lastIndex){ // till not reach the initialization value
-            lastIndex = hash[lastIndex];
-            temp.push_back(arr[lastIndex]);    
+        vector<int> lis(maxi);
+        lis[0] = nums[last_index];
+        int i=1;
+        while(hash[last_index] != last_index){
+            last_index = hash[last_index];
+            lis[i] = nums[last_index];
+            i++;
         }
-        reverse(temp.begin(),temp.end());
-        return temp;
+        reverse(lis.begin(),lis.end());
+        return lis;
     }
 };
