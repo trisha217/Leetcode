@@ -19,7 +19,7 @@ public:
             if(node == n && freq[n] == 2) {
                 return timeTaken;
             }
-            int signal = timeTaken/change;
+			int signal = timeTaken/change;
             if(signal % 2 == 1) {
                 timeTaken = change * (signal + 1) + time;
             } else {
