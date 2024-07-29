@@ -1,28 +1,27 @@
 class Solution {
 public:
     int maxStarSum(vector<int>& vals, vector<vector<int>>& edges, int k) {
-        int n=vals.size();
-        int ans = INT_MIN;
-        // Create the adjacency list
-        vector<vector<int>> adj(n);
-        for (const auto& edge : edges) {
-            adj[edge[0]].push_back(edge[1]);
-            adj[edge[1]].push_back(edge[0]);
-        }
+        unordered_map<int,priority_queue<int>> mp;
+        int n = edges.size();
+        int maxsum = *max_element(vals.begin(),vals.end());
         for(int i=0;i<n;i++){
-            vector<int> neighbourVals;
-            for(auto it: adj[i]){
-                neighbourVals.push_back(vals[it]);
-            }
-            sort(neighbourVals.rbegin(),neighbourVals.rend());
-            int sum = vals[i];
-            for(int j=0;j<min(k,(int)neighbourVals.size());j++){
-                if (neighbourVals[j] > 0) {  // Only include positive values from neighbors
-                    sum += neighbourVals[j];
-                }
-            }
-            ans = max(ans, sum);
+            mp[edges[i][0]].push(vals[edges[i][1]]);
+            mp[edges[i][1]].push(vals[edges[i][0]]);
         }
-        return ans;
+        for(auto it: mp){
+            int node = it.first;
+            int sum = vals[node];
+            int k_ = k;
+            while(!it.second.empty() && k_>0){
+                int value = it.second.top();
+                if(value>0){
+                    sum+= value;
+                    k_--;
+                }
+                it.second.pop();
+            }
+            maxsum = max(sum,maxsum);
+        }
+        return maxsum;
     }
 };
