@@ -1,34 +1,36 @@
 class Solution {
 public:
-    bool dfs(int node,vector<vector<int>> &graph,vector<bool> &vis,vector<bool> &pathVis,vector<bool> &check)
-    {
-        vis[node]=1;
-        pathVis[node]=1;
-        for(auto it:graph[node])
-        {
-            if(!vis[it])
-            {
-               if(dfs(it,graph,vis,pathVis,check)==1)
-                return true;    
-            }
-            else if(pathVis[it]==1)
-                return true;  
-        }
-        check[node]=1;                                    //marking the node which are not part of cycle
-        pathVis[node]=0;
-        return false;
-    }
     vector<int> eventualSafeNodes(vector<vector<int>>& graph) {
-        vector<int> res;
-        int n=graph.size();
-        vector<bool> vis(n,0),pathVis(n,0),check(n,0);
-        for(int i=0;i<n;i++)
-            if(!vis[i])
-                dfs(i,graph,vis,pathVis,check);
-        for(int i=0;i<n;i++)
-            if(check[i]==1)
-                res.push_back(i);
-        return res;
+        int V = graph.size();
+        vector<int> adjRev[V];
+        vector<int> indegree(V,0);
+		for (int i = 0; i < V; ++i) {
+            // i -> it
+			// it -> i
+			for (auto it : graph[i]) {
+				adjRev[it].push_back(i);
+				indegree[i]++;
+			}
+        }
+        queue<int> q;
+	    vector<int> ans;
+	    for(int i=0;i<V;i++){
+	        if(indegree[i]==0){
+	            q.push(i);
+	        }
+	    }
+	    while(!q.empty()){
+	        int node = q.front();
+	        q.pop();
+	        ans.push_back(node);
+	        for(auto it: adjRev[node]){
+	            indegree[it]--;
+	            if(indegree[it]==0){
+	                q.push(it);
+	            }
+	        }
+	    }
+        sort(ans.begin(),ans.end());
+	    return ans;
     }
 };
-
