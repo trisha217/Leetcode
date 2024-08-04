@@ -1,39 +1,37 @@
 class Solution {
-       vector<vector<int>> dir = {{1,0},{0,1},{-1,0},{0,-1},{1,1},{-1,-1},{-1,1},{1,-1}};
-    
 public:
-
     int shortestPathBinaryMatrix(vector<vector<int>>& grid) {
-        // code here
-        int res = 0;
-        int N= grid.size();
-        int M = grid[0].size();
-        if (grid[0][0] != 0 | grid[N-1][M-1] != 0) return -1;
-        queue<pair<int,int>> q;
-        q.push({0,0});
-        vector<vector<bool>> visit(N,vector<bool>(M,false));
-        vector<vector<int>>dist(N,vector<int>(M,INT_MAX));
-        dist[0][0] = 1;
-        
-        while(!q.empty()) {
-            auto u = q.front();
+        int n = grid.size();
+        int m = grid[0].size();
+        if(n==1 && m==1 && grid[0][0]!=1){
+            return 1;
+        }
+        if(grid[0][0]==1 || grid[n-1][n-1]==1){
+            return -1;
+        }
+        vector<vector<int>> dist(n,vector<int> (m,1e9));
+        queue<pair<int,pair<int,int>>> q;
+        q.push({1,{0,0}});
+        dist[0][0]=1;
+        int dr[] = {-1, -1, -1, 0, 1, 1, 1, 0};
+        int dc[] = {-1, 0, 1, 1, 1, 0, -1, -1};
+        while(!q.empty()){
+            int dis = q.front().first;
+            int r = q.front().second.first;
+            int c = q.front().second.second;
             q.pop();
-            int x = u.first;
-            int y = u.second;
-            visit[x][y] = true;
-            
-            for(auto d: dir) {
-                int r = x + d[0];
-                int c = y + d[1];
-               
-                if(r >=0 && r < N && c >=0 && c < M && grid[r][c]==0) {
-                    if(!visit[r][c] && dist[r][c] > dist[x][y]+1) {
-                       dist[r][c] = dist[x][y] +1;
-                        q.push({r,c});
-                    }
+            for(int i = 0; i < 8; i++){
+                int newr = r + dr[i];
+                int newc = c + dc[i];
+                // Checking the validity of the cell and updating if dist is shorter.
+                if (newr >= 0 && newr < n && newc >= 0 && newc < m && grid[newr][newc] == 0 && dis + 1 < dist[newr][newc]){
+                    dist[newr][newc] = dis + 1;
+                    if (newr == n-1 && newc == n-1)
+                        return dis + 1;
+                    q.push({1 + dis, {newr, newc}});
                 }
             }
         }
-        return dist[N-1][M-1] != INT_MAX ? dist[N-1][M-1]:-1;
+        return -1;
     }
 };
