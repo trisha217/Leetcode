@@ -4,7 +4,7 @@ public:
         //base case
         if(target==0){
             ans.push_back(ds);
-            //return;
+            return;
         }
         for(int i=ind;i<arr.size();i++){
             if(i!=ind && arr[i]==arr[i-1]){
