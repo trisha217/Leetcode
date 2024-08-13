@@ -16,30 +16,27 @@ public:
         if(root == NULL){
             return ans;
         }
+        bool leftToRight = true;
         queue<TreeNode*> q;
         q.push(root);
-        bool leftToRight = true;
         while(!q.empty()){
             int size = q.size();
-            //cout<<size;
-            vector<int> row(size);
+            vector<int> level;
             for(int i=0;i<size;i++){
                 TreeNode* node = q.front();
                 q.pop();
-                row[i] = node->val;
-                if(node->left){
+                if(node->left)
                     q.push(node->left);
-                }
-                if(node->right){
+                if(node->right)
                     q.push(node->right);
-                }
+                level.push_back(node->val);
             }
-            if(leftToRight==false){
-                reverse(row.begin(),row.end());
+            if(leftToRight == false){
+                reverse(level.begin(),level.end());
+                
             }
             leftToRight = !leftToRight;
-            ans.push_back(row);
-            row.clear();
+            ans.push_back(level);
         }
         return ans;
     }
