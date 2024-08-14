@@ -11,16 +11,22 @@
  */
 class Solution {
 public:
-    bool isSymmetric(TreeNode* root) {
-        return (root == NULL) || solve(root->left,root->right);
-    }
-    bool solve(TreeNode* node1, TreeNode* node2){
-        if(node1==NULL || node2 ==NULL){
-            return node1==node2;
+    bool solve(TreeNode* root1, TreeNode* root2){
+        if(root1 == NULL && root2 == NULL){
+            return true;
         }
-        if(node1->val!=node2->val){
+        if(root1 == NULL || root2 == NULL){
             return false;
         }
-        return solve(node1->left,node2->right) && solve(node1->right,node2->left);
+        if(root1->val != root2->val){
+            return false;
+        }
+        return solve(root1->left,root2->right) && solve(root1->right,root2->left);
+    }
+    bool isSymmetric(TreeNode* root) {
+        if(root == NULL){
+            return true;
+        }
+        return solve(root->left,root->right);
     }
 };
