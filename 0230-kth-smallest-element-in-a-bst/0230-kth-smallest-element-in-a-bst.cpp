@@ -9,41 +9,23 @@
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
- // void inorder(TreeNode* root, vector<int> &ans)
- //     {
- //         if(root == NULL)
- //        {
- //            return;
- //        }
- //        inorder(root->left,ans);
- //        ans.push_back(root->val);
- //        inorder(root->right,ans);          
- //     }
- //    int kthSmallest(TreeNode* root, int k) {
- //        vector<int> ans;
- //        inorder(root,ans);
- //        return ans[k-1];
- //    }
-
-
 class Solution {
 public:
-    int ans=INT_MAX;
-    void solve(TreeNode* root,int &k){
-        if(root==NULL){
+    void solve(TreeNode* root, int &k, int &ans){
+        if(root == NULL){
             return;
         }
-        solve(root->left,k);
+        solve(root->left,k,ans);
         k--;
-        if(k==0){
-            ans=root->val;
+        if(k == 0){
+            ans = root->val;
             return;
         }
-        solve(root->right,k);
+        solve(root->right,k,ans);
     }
     int kthSmallest(TreeNode* root, int k) {
-        solve(root,k);
+        int ans = INT_MAX;
+        solve(root,k,ans);
         return ans;
     }
 };
