@@ -16,33 +16,32 @@ public:
             return 0;
         }
         int ans = 0;
-        queue<pair<TreeNode*, int>> q;
+        queue<pair<TreeNode*,int>> q;
+        //node, index
         q.push({root,0});
         while(!q.empty()){
+            int mini = q.front().second;
             int size = q.size();
-            int mini = q.front().second; //to make index starting from 0, mini for each level
-            int first, last;
-            for(int i=0;i<size;i++){ //traversing each level
-                int curr_index = q.front().second - mini;
+            int f=0,l=0;
+            for(int i=0;i<size;i++){
                 TreeNode* node = q.front().first;
+                int cur_ind = q.front().second - mini;
                 q.pop();
-                if(i==0){
-                    first = curr_index;
+                if (i == 0) {
+                    f = cur_ind;
                 }
-                if(i==size-1){
-                    last = curr_index;
+                if (i == size - 1) {
+                    l = cur_ind;
                 }
-                if(node->left){
-                    q.push({node->left, (long long)curr_index*2 + 1});
+                if (node->left) {
+                    q.push({node->left, (long long)cur_ind * 2 + 1});
                 }
-                if(node->right){
-                    q.push({node->right, (long long)curr_index*2 + 2});
+                if (node->right) {
+                    q.push({node->right, (long long)cur_ind * 2 + 2});
                 }
             }
-            ans = max(ans, last-first+1);
+            ans = max(ans, l - f + 1);
         }
         return ans;
     }
 };
-
-//size_t
