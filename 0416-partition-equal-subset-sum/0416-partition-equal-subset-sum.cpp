@@ -15,13 +15,13 @@ public:
         prev[0]= cur[0] = true;
         if(arr[0] <= sum)
             prev[arr[0]] = true;
-        for(int ind = 1; ind < n; ind++) {
-            for(int target = 1; target <= sum; target++) {
-                bool pick = false;
-                bool notpick;
-                if(arr[ind] <= target) {
-                    pick = prev[target - arr[ind]];
-                }
+        for(int ind=1;ind<n;ind++)
+        {
+            for(int target=1;target<=sum;target++)
+            {
+                bool pick = false, notpick;
+                if(arr[ind] <= target)
+                    pick = prev[target-arr[ind]];
                 notpick = prev[target];
                 cur[target] = notpick || pick;
             }
