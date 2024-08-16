@@ -2,7 +2,7 @@ class Solution {
 public:
     int solve(vector<int>& nums) {
         int n = nums.size();
-        if (n == 0) return 0; 
+        //if (n == 0) return 0; 
         int cur, prev=nums[0], prev2=nums[0];
         for(int i=1;i<n;i++){
             int pick = nums[i];
