@@ -21,13 +21,14 @@ public:
             }
             else if(dp[i][j-1]>dp[i-1][j]){
                 s+=y[j-1];
-                j--;    // else find the max of up and right position of dp table and move accordingly to up or left
+                j--;    // else find the max of up and right position of dp table and move accordingly to up or left and printing that character
             }
             else{
                 s+=x[i-1];
                 i--; 
             }
         }
+        //printing remaining characters if anything is left
         while(i>0){
             s+=x[i-1];
             i--;
