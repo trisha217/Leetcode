@@ -1,21 +1,27 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& a) {
-        int n = a.size();
-        int aheadbuy, aheadnotbuy, curbuy, curnotbuy;
-        aheadnotbuy = aheadbuy = 0;
-
-        // Loop through the array in reverse order
-        for (int ind = n - 1; ind >= 0; ind--) {
-            
-            curnotbuy = max(a[ind] + aheadbuy,0 + aheadnotbuy );
-            curbuy = max(-a[ind] + aheadnotbuy,0 + aheadbuy );
-            
-            
-            aheadbuy = curbuy;
-            aheadnotbuy = curnotbuy;
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+        vector<vector<int>> dp(n+1,vector<int> (2,0));
+        dp[n][0] = dp[n][1] = 0;
+        long profit=0;
+        //n days
+        for(int i=n-1;i>=0;i--){
+            //buy
+            for(int j=0;j<2;j++){
+                if(j==0){
+                    int op1 = 0 + dp[i+1][0];
+                    int op2 = -prices[i] + dp[i+1][1];
+                    profit = max(op1,op2);
+                }
+                else{
+                    int op1 = 0 + dp[i+1][1];
+                    int op2 = prices[i] + dp[i+1][0];
+                    profit = max(op1,op2);
+                }
+                dp[i][j] = profit;
+            }
         }
-
-        return aheadbuy;
+        return dp[0][0];
     }
 };
