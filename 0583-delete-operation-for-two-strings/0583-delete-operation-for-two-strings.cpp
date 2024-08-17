@@ -2,19 +2,20 @@ class Solution {
 public:
     int minDistance(string x, string y) {
         int n=x.size(),m=y.size();
-        vector<int> cur(m+1,0);
-        vector<int> prev(m+1,0);
-        int ans = 0;
+        int dp[n+1][m+1];
+        //base case ( i==0 || j==0) return 0;
+        for(int i=0;i<=n;i++)dp[i][0]=0;
+        for(int i=0;i<=m;i++)dp[0][i]=0;
+        
         for(int i=1;i<=n;i++){
             for(int j=1;j<=m;j++){
                 if(x[i-1]==y[j-1])
-                    cur[j]=1 + prev[j-1];
+                    dp[i][j]=1+dp[i-1][j-1];
                 else {
-                    cur[j]=max(cur[j-1],prev[j]);
+                    dp[i][j]=max(dp[i][j-1],dp[i-1][j]);
                 }
             }
-            prev = cur;
         }
-        return m+n-prev[m]-prev[m];
+        return (m+n) - (2 * dp[n][m]);
     }
 };
