@@ -1,17 +1,27 @@
 class Solution {
 public:
-    int maxProfit(vector<int>& Arr) {
-        int n = Arr.size();
-        // Create a DP table to memoize results
-        vector<vector<int>> dp(n + 2, vector<int>(2, 0));
-        
-        // Loop through the array in reverse order
-        for (int ind = n - 1; ind >= 0; ind--) {
-            dp[ind][1] = max(0 + dp[ind + 1][1], -Arr[ind] + dp[ind + 1][0]);
-            dp[ind][0] = max(0 + dp[ind + 1][0], Arr[ind] + dp[ind + 2][1]);
+    int maxProfit(vector<int>& prices) {
+        int n=prices.size();
+        vector<vector<int>> dp(n+2,vector<int> (2,0));
+        dp[n][0] = dp[n][1] = 0;
+        long profit=0;
+        //n days
+        for(int i=n-1;i>=0;i--){
+            //buy
+            for(int j=0;j<2;j++){
+                if(j==0){
+                    int op1 = 0 + dp[i+1][0];
+                    int op2 = -prices[i] + dp[i+1][1];
+                    profit = max(op1,op2);
+                }
+                else{
+                    int op1 = 0 + dp[i+1][1];
+                    int op2 = prices[i] + dp[i+2][0];
+                    profit = max(op1,op2);
+                }
+                dp[i][j] = profit;
+            }
         }
-
-        // The maximum profit is stored in dp[0][1] after all calculations
-        return dp[0][1];
+        return dp[0][0];
     }
 };
