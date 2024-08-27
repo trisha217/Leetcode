@@ -1,16 +1,16 @@
 class Solution {
 public:
-    void dfs(vector<vector<char>>& grid, int y, int x){
+    void dfs(vector<vector<char>>& grid, int x, int y){
         //if out of bounds
-        if(x<0 ||y<0 || y>=grid.size() || x>=grid[0].size() || grid[y][x]!='1'){
+        if(x<0 ||y<0 || x>=grid.size() || y>=grid[0].size() || grid[x][y]!='1'){
             return;
         }
         //marking the grid so we don't visit again
-        grid[y][x] = '*';
-        dfs(grid,y-1,x);
-        dfs(grid,y+1,x);
-        dfs(grid,y,x-1);
-        dfs(grid,y,x+1);
+        grid[x][y] = '*';
+        dfs(grid,x-1,y);
+        dfs(grid,x+1,y);
+        dfs(grid,x,y-1);
+        dfs(grid,x,y+1);
     }
     int numIslands(vector<vector<char>>& grid) {
         int ans =0;
