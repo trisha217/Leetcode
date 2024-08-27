@@ -1,12 +1,18 @@
 class Solution {
 public:
- vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
-        vector<int> parent(n),ans ;
-        for(int i=0;i<n;i++) parent[i] = i ;
-        for(int i=0;i<edges.size();i++) 
-            parent[edges[i][1]] = edges[i][0] ;
-        for (int i=0;i<n;i++) 
-            if (parent[i]==i)ans.push_back(i) ;
-        return ans ;
+    vector<int> findSmallestSetOfVertices(int n, vector<vector<int>>& edges) {
+        vector<vector<int>> adjList(n);
+        vector<int>indeg(n,0);
+        for(auto it: edges){
+            adjList[it[0]].push_back(it[1]);
+            indeg[it[1]]++;
+        }
+        vector<int> ans;
+        for(int i=0;i<n;i++){
+            if(indeg[i] == 0){
+                ans.push_back(i);
+            }
+        }
+        return ans;
     }
 };
