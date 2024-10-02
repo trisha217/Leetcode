@@ -1,33 +1,29 @@
 class Solution {
 public:
     bool canArrange(vector<int>& arr, int k) {
-         unordered_map<int, int> remainderCount;
-    
-    // Step 1: Calculate remainders and count their frequencies
-    for (int num : arr) {
-        int remainder = ((num % k) + k) % k; // Handle negative numbers
-        remainderCount[remainder]++;
-    }
-
-    // Step 2: Check conditions for valid pairing
-    for (auto& entry : remainderCount) {
-        int remainder = entry.first;
-        int count = entry.second;
-
-        // Case 1: If the remainder is 0, there must be an even number of such elements
-        if (remainder == 0) {
-            if (count % 2 != 0) {
+        vector<int>ans(k+1,0);
+        //calculate all remainders
+        for(int i=0;i<arr.size();i++){
+            int rem=(arr[i]%k);
+            //handling negative arr[i] for remainders
+            rem=(arr[i]%k+k)%k;
+            ans[rem]++;
+        }
+        // for(auto&it:ans){
+        //     cout<<it<<" ";
+        // }
+        cout<<endl;
+        //check if all have
+        if(ans[0]%2!=0){
+            return false;
+        }
+        for(int i=1;i<=k/2;i++){
+            // int rem=(arr[i]%k+k)%k;
+            // cout<<i<<" "<<k<<endl;
+            if(ans[i]!=ans[k-i]){
                 return false;
             }
         }
-        // Case 2: For other remainders, the count of elements with remainder `r`
-        // must match the count of elements with remainder `k - r`
-        else if (remainderCount[remainder] != remainderCount[k - remainder]) {
-            return false;
-        }
-    }
-
-    // If all conditions are satisfied, return true
-    return true;
+        return true;
     }
 };
